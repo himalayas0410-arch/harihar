@@ -30,3 +30,4 @@ export class ConsultationsController {
     return this.consultationsService.getConsultationByAppointment(appointmentId);
   }
 }
+

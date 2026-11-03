@@ -8,3 +8,4 @@ import { PrescriptionsController } from './prescriptions.controller';
   exports: [PrescriptionsService],
 })
 export class PrescriptionsModule {}
+

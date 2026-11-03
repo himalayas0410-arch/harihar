@@ -135,3 +135,4 @@ export class AvailabilityService {
     return slots;
   }
 }
+

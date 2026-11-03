@@ -22,3 +22,4 @@ export class DoctorsController {
     return this.doctorsService.getDoctorDashboardStats(doctorId);
   }
 }
+

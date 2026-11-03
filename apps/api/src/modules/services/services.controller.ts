@@ -15,3 +15,4 @@ export class ServicesController {
     return this.servicesService.getServiceBySlug(slug);
   }
 }
+

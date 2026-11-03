@@ -8,3 +8,4 @@ import { ConsultationsController } from './consultations.controller';
   exports: [ConsultationsService],
 })
 export class ConsultationsModule {}
+

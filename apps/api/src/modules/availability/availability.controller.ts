@@ -13,3 +13,4 @@ export class AvailabilityController {
     return this.availabilityService.getAvailableSlots(date, doctorId);
   }
 }
+

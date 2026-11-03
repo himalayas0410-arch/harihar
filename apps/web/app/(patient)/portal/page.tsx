@@ -26,8 +26,10 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { formatINR } from '@/lib/utils';
+import { fallbackDoctor } from '@/lib/api';
 
 export default function PatientPortalPage() {
+  const doctor = fallbackDoctor;
   const [activeTab, setActiveTab] = useState<
     'overview' | 'appointments' | 'consultations' | 'prescriptions' | 'records' | 'progress' | 'payments' | 'profile'
   >('overview');

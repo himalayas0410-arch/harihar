@@ -234,3 +234,4 @@ export const formatToIST = (dateString: string | Date): string => {
     timeStyle: 'short'
   }).format(date);
 };
+

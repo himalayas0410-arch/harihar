@@ -49,3 +49,4 @@ export class PrescriptionsController {
     return this.prescriptionsService.getPrescriptionById(id, user);
   }
 }
+

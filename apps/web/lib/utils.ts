@@ -22,3 +22,4 @@ export function formatIST(dateInput: string | Date): string {
     timeStyle: 'short',
   }).format(date);
 }
+

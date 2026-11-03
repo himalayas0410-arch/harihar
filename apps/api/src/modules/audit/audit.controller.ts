@@ -16,3 +16,4 @@ export class AuditController {
     return this.auditService.getRecentLogs(limit ? parseInt(limit, 10) : 50);
   }
 }
+

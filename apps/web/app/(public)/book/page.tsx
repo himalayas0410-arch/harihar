@@ -22,6 +22,7 @@ import {
   Check,
   Timer,
   HelpCircle,
+  Sparkles,
 } from 'lucide-react';
 import { fallbackServices, fallbackDoctor } from '@/lib/api';
 import { formatINR } from '@/lib/utils';

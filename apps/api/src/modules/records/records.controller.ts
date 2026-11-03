@@ -34,3 +34,4 @@ export class RecordsController {
     return this.recordsService.deleteRecord(id, user);
   }
 }
+

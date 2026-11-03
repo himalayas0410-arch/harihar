@@ -52,3 +52,4 @@ export class AppointmentsController {
     return this.appointmentsService.cancelAppointment(id, userId, reason);
   }
 }
+
