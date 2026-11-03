@@ -1,0 +1,397 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum UserRole {
+  PATIENT
+  DOCTOR
+  ADMIN
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+  PREFER_NOT_TO_SAY
+}
+
+enum AppointmentStatus {
+  PENDING_PAYMENT      // 15-minute slot lock
+  CONFIRMED            // Payment verified, meeting prepared
+  IN_PROGRESS          // Consultation actively ongoing
+  COMPLETED            // Prescribed and finished
+  CANCELLED            // Cancelled by patient or doctor
+  RESCHEDULED          // Moved to another slot
+  NO_SHOW              // Patient or doctor did not attend
+}
+
+enum MeetingProvider {
+  GOOGLE_MEET
+  ZOOM
+  WHATSAPP
+}
+
+enum PaymentStatus {
+  CREATED
+  AUTHORIZED
+  CAPTURED
+  FAILED
+  REFUNDED
+}
+
+enum PrescriptionStatus {
+  DRAFT
+  APPROVED             // Immutable once approved
+  REVOKED              // Replaced by new prescription version
+}
+
+enum DosageForm {
+  TABLET
+  CAPSULE
+  CREAM
+  OINTMENT
+  GEL
+  LOTION
+  SERUM
+  SOLUTION
+  SOAP_CLEANSER
+  SUNSCREEN
+  INJECTION
+}
+
+enum MedicalRecordType {
+  SKIN_PHOTO           // Photos uploaded by patient for analysis
+  LAB_REPORT
+  BIOPSY_REPORT
+  PRIOR_PRESCRIPTION
+  CLINICAL_IMAGE       // Doctor-captured image
+  OTHER
+}
+
+model User {
+  id            String       @id @default(uuid())
+  phoneNumber   String       @unique
+  email         String?      @unique
+  passwordHash  String?
+  role          UserRole     @default(PATIENT)
+  fullName      String
+  isActive      Boolean      @default(true)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  patient       Patient?
+  doctor        Doctor?
+  consents      PatientConsent[]
+  auditLogs     AuditLog[]
+  notifications Notification[]
+
+  @@index([phoneNumber])
+  @@index([email])
+}
+
+model Patient {
+  id                 String          @id @default(uuid())
+  userId             String          @unique
+  user               User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  dateOfBirth        DateTime?
+  gender             Gender?
+  bloodGroup         String?
+  allergies          String[]        @default([])
+  chronicConditions  String[]        @default([])
+  emergencyContact   String?
+  city               String?
+  state              String?
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
+
+  appointments       Appointment[]
+  medicalRecords     MedicalRecord[]
+  prescriptions      Prescription[]
+
+  @@index([userId])
+}
+
+model Doctor {
+  id                    String         @id @default(uuid())
+  userId                String         @unique
+  user                  User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  nmcRegistrationNumber String         @unique // Mandated by Indian NMC guidelines
+  stateMedicalCouncil   String
+  qualificationString   String         // e.g. "MBBS, MD (Dermatology, Venereology & Leprosy)"
+  specialties           String[]
+  bio                   String         @db.Text
+  experienceYears       Int
+  consultationFeePaise  Int            // In integer paise (e.g. 100000 = ₹1,000)
+  profileImageUrl       String?
+  signatureImageUrl     String?        // Encrypted URL to digital signature for approved Rx
+  createdAt             DateTime       @default(now())
+  updatedAt             DateTime       @updatedAt
+
+  availabilities        Availability[]
+  appointments          Appointment[]
+  consultations         Consultation[]
+  prescriptions         Prescription[]
+
+  @@index([userId])
+}
+
+model Service {
+  id                  String         @id @default(uuid())
+  name                String         // e.g. "Acne & Scar Consultation", "Hair Fall & Trichoscopy"
+  slug                String         @unique
+  description         String         @db.Text
+  durationMinutes     Int            @default(20)
+  priceInPaise        Int            // Stored in paise
+  isActive            Boolean        @default(true)
+  features            String[]
+  createdAt           DateTime       @default(now())
+  updatedAt           DateTime       @updatedAt
+
+  appointments        Appointment[]
+}
+
+model Availability {
+  id                  String         @id @default(uuid())
+  doctorId            String
+  doctor              Doctor         @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+  dayOfWeek           Int            // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+  startTime           String         // "09:00" (IST 24-hr format)
+  endTime             String         // "13:00"
+  slotDurationMinutes Int            @default(20)
+  breakStartTime      String?        // e.g. "11:00"
+  breakEndTime        String?        // e.g. "11:30"
+  isDateOverride      Boolean        @default(false)
+  overrideDate        DateTime?      // If specific date blackout or special timings
+  isAvailable         Boolean        @default(true)
+  createdAt           DateTime       @default(now())
+  updatedAt           DateTime       @updatedAt
+
+  @@index([doctorId, dayOfWeek])
+  @@index([overrideDate])
+}
+
+model Appointment {
+  id                 String                        @id @default(uuid())
+  appointmentNumber  String                        @unique // e.g. "DC-202611-0012"
+  patientId          String
+  patient            Patient                       @relation(fields: [patientId], references: [id])
+  doctorId           String
+  doctor             Doctor                        @relation(fields: [doctorId], references: [id])
+  serviceId          String
+  service            Service                       @relation(fields: [serviceId], references: [id])
+
+  slotStartTime      DateTime                      // UTC timestamp
+  slotEndTime        DateTime                      // UTC timestamp
+  status             AppointmentStatus             @default(PENDING_PAYMENT)
+  slotLockedUntil    DateTime?                     // Expiry timestamp for reservation lock
+
+  chiefComplaint     String?                       @db.Text
+  meetingProvider    MeetingProvider               @default(GOOGLE_MEET)
+  meetingJoinUrl     String?                       // Patient-facing sanitized URL
+  meetingHostUrl     String?                       // Doctor-facing host URL (Zoom/Meet)
+  meetingId          String?
+  meetingPassword    String?
+
+  createdAt          DateTime                      @default(now())
+  updatedAt          DateTime                      @updatedAt
+
+  payment            Payment?
+  consultation       Consultation?
+  rescheduleHistory  AppointmentRescheduleHistory[]
+
+  @@index([doctorId, slotStartTime, slotEndTime])
+  @@index([patientId])
+  @@index([status])
+}
+
+model AppointmentRescheduleHistory {
+  id                  String       @id @default(uuid())
+  appointmentId       String
+  appointment         Appointment  @relation(fields: [appointmentId], references: [id], onDelete: Cascade)
+  previousSlotStart   DateTime
+  previousSlotEnd     DateTime
+  newSlotStart        DateTime
+  newSlotEnd          DateTime
+  rescheduledByUserId String
+  reason              String?
+  createdAt           DateTime     @default(now())
+}
+
+model Payment {
+  id                 String         @id @default(uuid())
+  appointmentId      String         @unique
+  appointment        Appointment    @relation(fields: [appointmentId], references: [id])
+  amountInPaise      Int            // Integer paise (e.g. 80000 = ₹800.00)
+  currency           String         @default("INR")
+  razorpayOrderId    String         @unique
+  razorpayPaymentId  String?        @unique
+  razorpaySignature  String?
+  status             PaymentStatus  @default(CREATED)
+  idempotencyKey     String         @unique
+  receiptNumber      String         @unique
+  taxInPaise         Int            @default(0)
+  refundId           String?
+  refundAmountPaise  Int?
+  rawResponse        Json?
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+
+  @@index([razorpayOrderId])
+  @@index([status])
+}
+
+model PaymentWebhookEvent {
+  id                 String         @id @default(uuid())
+  eventId            String         @unique // Razorpay event ID for strict deduplication
+  eventType          String
+  payload            Json
+  processed          Boolean        @default(false)
+  processedAt        DateTime?
+  error              String?
+  createdAt          DateTime       @default(now())
+
+  @@index([eventId])
+}
+
+model Consultation {
+  id                    String         @id @default(uuid())
+  appointmentId         String         @unique
+  appointment           Appointment    @relation(fields: [appointmentId], references: [id])
+  doctorId              String
+  doctor                Doctor         @relation(fields: [doctorId], references: [id])
+  
+  // Clinical SOAP documentation format
+  subjectiveSymptoms    String         @db.Text
+  durationOfComplaints  String?
+  objectiveFindings     String         @db.Text // Dermatological examination
+  lesionCharacteristics String?        // Distribution, morphology, erythema, scaling
+  differentialDiagnosis String?        @db.Text
+  finalDiagnosis        String         @db.Text
+  clinicalAdvice        String?        @db.Text
+  dietLifestyleAdvice   String?        @db.Text
+  followUpDays          Int?           // e.g. 14 days
+  
+  createdAt             DateTime       @default(now())
+  updatedAt             DateTime       @updatedAt
+
+  prescription          Prescription?
+
+  @@index([doctorId])
+}
+
+model Prescription {
+  id                     String             @id @default(uuid())
+  prescriptionNumber     String             @unique // "RX-202611-0045"
+  consultationId         String             @unique
+  consultation           Consultation       @relation(fields: [consultationId], references: [id])
+  patientId              String
+  patient                Patient            @relation(fields: [patientId], references: [id])
+  doctorId               String
+  doctor                 Doctor             @relation(fields: [doctorId], references: [id])
+  
+  status                 PrescriptionStatus @default(DRAFT)
+  version                Int                @default(1)
+  parentPrescriptionId   String?            // If revised, pointers to previous version
+  pdfStoragePath         String?            // S3 object key
+  doctorSignatureHash    String?            // SHA256 cryptographic audit seal
+  approvedAt             DateTime?
+  validUntil             DateTime?
+
+  createdAt              DateTime           @default(now())
+  updatedAt              DateTime           @updatedAt
+
+  items                  PrescriptionItem[]
+
+  @@index([patientId])
+  @@index([doctorId])
+  @@index([status])
+}
+
+model PrescriptionItem {
+  id                 String       @id @default(uuid())
+  prescriptionId     String
+  prescription       Prescription @relation(fields: [prescriptionId], references: [id], onDelete: Cascade)
+  medicineName       String       // Brand name or generic name
+  genericName        String?      // Recommended by NMC guidelines
+  dosageForm         DosageForm   // CREAM, LOTION, TABLET, etc.
+  strength           String?      // e.g. "0.05%", "20mg"
+  dosage             String       // e.g. "1 pea-sized amount" or "1 tablet"
+  frequency          String       // e.g. "Once daily at night", "Twice daily after food"
+  durationDays       Int          // e.g. 14
+  instructions       String?      // e.g. "Apply thin layer only on lesions; use sunscreen in morning"
+  sortOrder          Int          @default(0)
+
+  @@index([prescriptionId])
+}
+
+model MedicalRecord {
+  id                 String            @id @default(uuid())
+  patientId          String
+  patient            Patient           @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  uploadedByUserId   String
+  recordType         MedicalRecordType
+  title              String
+  description        String?
+  s3Bucket           String
+  s3Key              String            @unique
+  fileSizeBytes      Int
+  mimeType           String
+  isDoctorShared     Boolean           @default(false)
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+
+  @@index([patientId])
+  @@index([recordType])
+}
+
+model PatientConsent {
+  id                 String       @id @default(uuid())
+  userId             String
+  user               User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  consentType        String       // "TELEMEDICINE_TREATMENT_AGREEMENT", "PRIVACY_POLICY_DPDP"
+  consentGiven       Boolean      @default(true)
+  version            String       // e.g. "v1.0"
+  ipAddress          String
+  userAgent          String
+  consentedAt        DateTime     @default(now())
+
+  @@index([userId])
+}
+
+model Notification {
+  id                 String       @id @default(uuid())
+  userId             String
+  user               User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  channel            String       // "WHATSAPP", "SMS", "EMAIL"
+  title              String
+  content            String       @db.Text
+  status             String       // "QUEUED", "SENT", "FAILED"
+  externalMessageId  String?
+  sentAt             DateTime?
+  createdAt          DateTime     @default(now())
+
+  @@index([userId])
+  @@index([status])
+}
+
+model AuditLog {
+  id                 String       @id @default(uuid())
+  actorUserId        String?
+  actorUser          User?        @relation(fields: [actorUserId], references: [id], onDelete: SetNull)
+  action             String       // "VIEW_RECORD", "APPROVE_PRESCRIPTION", "SLOT_LOCKED"
+  resource           String       // "PRESCRIPTION", "PATIENT_MEDICAL_HISTORY"
+  resourceId         String?
+  ipAddress          String
+  userAgent          String
+  metadata           Json?
+  timestamp          DateTime     @default(now())
+
+  @@index([actorUserId])
+  @@index([resource, resourceId])
+  @@index([timestamp])
+}

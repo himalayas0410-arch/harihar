@@ -1,0 +1,23 @@
+{
+  "name": "dermacare",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "db:generate": "npm run db:generate --workspace=@dermacare/database",
+    "db:push": "npm run db:push --workspace=@dermacare/database",
+    "db:seed": "npm run db:seed --workspace=@dermacare/database"
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3",
+    "turbo": "^2.1.3",
+    "typescript": "^5.6.3"
+  },
+  "packageManager": "npm@10.9.2"
+}
