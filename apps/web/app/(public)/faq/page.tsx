@@ -31,42 +31,42 @@ export default function FAQPage() {
   ];
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-12">
-      <div className="text-center space-y-4">
-        <span className="text-xs font-bold uppercase tracking-wider text-brand-700 bg-brand-50 border border-brand-200 px-3 py-1 rounded-full">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-12 bg-[#FAF8F5]">
+      <div className="text-center space-y-3">
+        <span className="text-xs font-bold uppercase tracking-wider text-forest-800 bg-forest-100/70 border border-forest-200 px-3.5 py-1 rounded-full">
           Frequently Asked Questions
         </span>
-        <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight">
+        <h1 className="text-4xl font-extrabold text-forest-950 tracking-tight">
           Everything You Need to Know
         </h1>
-        <p className="text-slate-600 text-sm sm:text-base">
+        <p className="text-forest-900/75 text-sm sm:text-base">
           Clear answers regarding Indian telemedicine regulations, prescription validity, and video appointments.
         </p>
       </div>
 
-      <div className="space-y-6">
+      <div className="space-y-5">
         {faqs.map((faq, i) => (
           <div
             key={i}
-            className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-7 shadow-sm space-y-3"
+            className="bg-white rounded-3xl border border-ivory-300 p-6 sm:p-8 shadow-premium space-y-3"
           >
-            <h3 className="text-base sm:text-lg font-bold text-slate-900 flex items-start gap-3">
-              <span className="text-brand-600 font-extrabold">Q.</span>
+            <h3 className="text-base sm:text-lg font-bold text-forest-950 flex items-start gap-3">
+              <span className="text-forest-700 font-extrabold">Q.</span>
               <span>{faq.q}</span>
             </h3>
-            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed pl-6">
+            <p className="text-xs sm:text-sm text-forest-900/75 leading-relaxed pl-6">
               {faq.a}
             </p>
           </div>
         ))}
       </div>
 
-      <div className="bg-slate-100 p-8 rounded-2xl text-center space-y-4">
-        <h4 className="text-base font-bold text-slate-900">Have a specific question not listed here?</h4>
-        <p className="text-xs text-slate-500">Our patient coordination desk is available on WhatsApp.</p>
+      <div className="bg-ivory-200/80 p-8 rounded-3xl text-center space-y-4 border border-ivory-300">
+        <h4 className="text-base font-bold text-forest-950">Have a specific question not listed here?</h4>
+        <p className="text-xs text-sage-700">Our patient coordination desk is available on WhatsApp.</p>
         <Link
           href="/contact"
-          className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-bold text-white bg-slate-900 hover:bg-brand-600 rounded-xl transition-colors"
+          className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-bold text-ivory-50 bg-forest-900 hover:bg-forest-800 rounded-xl transition-colors"
         >
           Contact Patient Helpdesk <ArrowRight className="w-3.5 h-3.5" />
         </Link>
