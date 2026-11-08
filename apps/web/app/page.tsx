@@ -15,6 +15,8 @@ import {
   ChevronRight,
   PhoneCall,
   UserCheck,
+  Check,
+  BadgeCheck,
 } from 'lucide-react';
 import { fallbackDoctor, fallbackServices } from '@/lib/api';
 import { formatINR } from '@/lib/utils';
@@ -55,18 +57,19 @@ export default function HomePage() {
 
   return (
     <div className="space-y-24 pb-24 bg-[#FAF8F5]">
-      {/* 1. HERO SECTION */}
-      <section className="relative pt-12 pb-20 lg:pt-20 lg:pb-28 overflow-hidden bg-gradient-to-b from-ivory-200 via-ivory-100 to-[#FAF8F5]">
+      {/* 1. LUXURY HERO SECTION */}
+      <section className="relative pt-8 pb-16 lg:pt-16 lg:pb-24 overflow-hidden bg-gradient-to-b from-ivory-200/80 via-ivory-100/60 to-[#FAF8F5]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Left Column: Hero Text */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+            {/* Left Column: Hero Text & Value Proposition */}
             <div className="lg:col-span-7 space-y-6">
               {/* Trust Badge */}
-              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-forest-900/5 border border-forest-800/15 text-forest-900 text-xs font-semibold">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-forest-900/5 border border-forest-800/15 text-forest-900 text-xs font-semibold">
                 <ShieldCheck className="w-4 h-4 text-forest-700" />
-                <span>NMC Registered • AIIMS Residency • 11+ Years Experience</span>
+                <span>NMC Registered • AIIMS Senior Residency • 11+ Years Post-PG</span>
               </div>
 
+              {/* Main Headline */}
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-forest-950 leading-[1.12]">
                 Clear, Healthy Skin with{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-forest-800 via-forest-600 to-sage-600">
@@ -75,6 +78,7 @@ export default function HomePage() {
                 Dermatology
               </h1>
 
+              {/* Clinical Mission Statement */}
               <p className="text-base sm:text-lg text-forest-900/75 leading-relaxed max-w-2xl font-normal">
                 Consult senior dermatologist <strong className="text-forest-950 font-bold">Dr. Harihar Sharma</strong> from anywhere in India. Get direct clinical diagnosis for acne, hair thinning, melasma, and eczema with official, doctor-approved digital prescriptions valid nationwide.
               </p>
@@ -86,84 +90,128 @@ export default function HomePage() {
                   className="inline-flex items-center justify-center gap-2.5 px-8 py-4 text-base font-bold text-ivory-50 bg-forest-900 hover:bg-forest-800 active:bg-forest-950 rounded-2xl shadow-xl shadow-forest-950/20 transition-all hover:-translate-y-0.5"
                 >
                   <Calendar className="w-5 h-5 text-sand-300" />
-                  Book Online Consultation
+                  <span>Book Online Consultation</span>
                 </Link>
 
                 <Link
                   href="/services"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-4 text-base font-semibold text-forest-900 hover:text-forest-950 bg-white hover:bg-ivory-200 border border-ivory-300 rounded-2xl transition-all"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-4 text-base font-semibold text-forest-900 hover:text-forest-950 bg-white hover:bg-ivory-200 border border-ivory-300 rounded-2xl transition-all shadow-sm"
                 >
-                  View Services & Fees
+                  <span>View Services & Fees</span>
                   <ChevronRight className="w-4 h-4 text-sage-500" />
                 </Link>
               </div>
 
-              {/* Key Practice Highlights */}
-              <div className="grid grid-cols-3 gap-4 pt-6 border-t border-ivory-300 max-w-lg">
-                <div className="space-y-1">
-                  <p className="text-xs text-sage-700">Availability</p>
-                  <p className="text-sm font-bold text-forest-950 flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
+              {/* Practice Highlights Pills */}
+              <div className="grid grid-cols-3 gap-3 sm:gap-4 pt-6 border-t border-ivory-300 max-w-xl">
+                <div className="bg-white/70 backdrop-blur-sm p-3 rounded-2xl border border-ivory-300/80 space-y-1">
+                  <p className="text-[11px] font-semibold text-sage-700">Availability</p>
+                  <p className="text-xs sm:text-sm font-bold text-forest-950 flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                     Slots Today (IST)
                   </p>
                 </div>
-                <div className="space-y-1">
-                  <p className="text-xs text-sage-700">Video Platform</p>
-                  <p className="text-sm font-bold text-forest-950">Meet / Zoom / WA</p>
+                <div className="bg-white/70 backdrop-blur-sm p-3 rounded-2xl border border-ivory-300/80 space-y-1">
+                  <p className="text-[11px] font-semibold text-sage-700">Video Platform</p>
+                  <p className="text-xs sm:text-sm font-bold text-forest-950">Meet / Zoom / WA</p>
                 </div>
-                <div className="space-y-1">
-                  <p className="text-xs text-sage-700">Prescription</p>
-                  <p className="text-sm font-bold text-forest-950">Official PDF Rx</p>
+                <div className="bg-white/70 backdrop-blur-sm p-3 rounded-2xl border border-ivory-300/80 space-y-1">
+                  <p className="text-[11px] font-semibold text-sage-700">Prescription</p>
+                  <p className="text-xs sm:text-sm font-bold text-forest-950">Official PDF Rx</p>
                 </div>
               </div>
             </div>
 
-            {/* Right Column: Doctor Profile Card */}
+            {/* Right Column: Luxury Doctor Profile Card */}
             <div className="lg:col-span-5 flex justify-center">
               <div className="relative w-full max-w-md">
                 {/* Decorative background glow */}
-                <div className="absolute -inset-3 bg-gradient-to-tr from-forest-400/20 via-sage-300/30 to-sand-400/20 rounded-3xl blur-2xl transform -rotate-1"></div>
+                <div className="absolute -inset-4 bg-gradient-to-tr from-forest-400/20 via-sage-300/30 to-sand-400/20 rounded-[32px] blur-2xl transform -rotate-1"></div>
 
-                <div className="relative bg-white rounded-3xl p-6 shadow-premium border border-ivory-300 space-y-5">
-                  <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-ivory-200">
+                <div className="relative bg-white rounded-3xl p-6 sm:p-7 shadow-premium border border-ivory-300 space-y-5">
+                  {/* Status & Rating Bar */}
+                  <div className="flex items-center justify-between pb-3 border-b border-ivory-200">
+                    <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
+                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                      Consultations Open Today
+                    </span>
+                    <span className="text-xs font-bold text-forest-900 flex items-center gap-1 bg-ivory-100 px-2.5 py-1 rounded-full border border-ivory-200">
+                      <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                      4.9 (1.2k+ reviews)
+                    </span>
+                  </div>
+
+                  {/* Doctor Portrait Image */}
+                  <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-ivory-200 shadow-inner">
                     <img
                       src={doctor.profileImageUrl}
                       alt={doctor.fullName}
-                      className="w-full h-full object-cover object-top"
+                      className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500"
                     />
-                    <div className="absolute bottom-3 left-3 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-xl shadow-sm border border-ivory-200 flex items-center gap-2">
-                      <Award className="w-4 h-4 text-forest-700" />
-                      <span className="text-xs font-bold text-forest-950">MD Dermatology (AIIMS)</span>
+                    {/* Floating credential pill */}
+                    <div className="absolute bottom-3 left-3 right-3 bg-white/95 backdrop-blur-md px-3 py-2 rounded-xl shadow-md border border-ivory-200 flex items-center justify-between text-xs">
+                      <div className="flex items-center gap-1.5 font-bold text-forest-950">
+                        <Award className="w-4 h-4 text-forest-700 shrink-0" />
+                        <span>MD Dermatology (AIIMS)</span>
+                      </div>
+                      <span className="text-[11px] font-semibold text-sage-700">
+                        11+ Yrs Post-PG
+                      </span>
                     </div>
                   </div>
 
-                  <div className="space-y-2">
+                  {/* Doctor Bio & Verified Info */}
+                  <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <h3 className="text-xl font-bold text-forest-950">{doctor.fullName}</h3>
-                      <span className="text-xs px-2.5 py-1 bg-forest-50 text-forest-800 font-semibold rounded-md border border-forest-200">
+                      <div className="flex items-center gap-1.5">
+                        <h3 className="text-xl font-extrabold text-forest-950">{doctor.fullName}</h3>
+                        <BadgeCheck className="w-5 h-5 text-forest-700" />
+                      </div>
+                      <span className="text-[11px] px-2.5 py-0.5 bg-forest-50 text-forest-800 font-bold rounded-full border border-forest-200">
                         Senior Consultant
                       </span>
                     </div>
+
                     <p className="text-xs text-sage-700 font-medium">
                       Reg. No: <strong className="text-forest-950">{doctor.nmcRegistrationNumber}</strong> ({doctor.stateMedicalCouncil})
                     </p>
-                    <p className="text-xs text-forest-900/75 leading-relaxed">
-                      Specialized in acne resolution, androgenetic alopecia, recalcitrant melasma, and barrier restoration without steroid dependency.
+
+                    {/* Specialization Chips (Clean grid, no awkward wrapping) */}
+                    <div className="flex flex-wrap gap-1.5 pt-1">
+                      {['Acne & Scarring', 'Hair Fall & PRP', 'Melasma & Pigmentation', 'Eczema Relief'].map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-[11px] font-semibold text-forest-900 bg-ivory-100 hover:bg-forest-50 px-2.5 py-1 rounded-lg border border-ivory-300 transition-colors"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+
+                    <p className="text-xs text-forest-900/75 leading-relaxed pt-1">
+                      Evidence-based clinical protocols with zero steroid abuse. Patient-tailored skincare and medical therapy.
                     </p>
                   </div>
 
-                  <div className="pt-3 border-t border-ivory-200 flex items-center justify-between">
+                  {/* Consultation Pricing & Action Bar */}
+                  <div className="pt-4 border-t border-ivory-200 flex items-center justify-between gap-4">
                     <div>
-                      <p className="text-[11px] text-sage-600 font-medium">Consultation Fee</p>
-                      <p className="text-lg font-extrabold text-forest-900">
-                        {formatINR(doctor.consultationFeePaise)}
+                      <p className="text-[11px] text-sage-600 font-semibold uppercase tracking-wider">
+                        Consultation Fee
                       </p>
+                      <div className="flex items-baseline gap-1.5">
+                        <p className="text-2xl font-extrabold text-forest-950">
+                          {formatINR(doctor.consultationFeePaise)}
+                        </p>
+                        <span className="text-[10px] text-sage-600 font-medium">(GST incl.)</span>
+                      </div>
                     </div>
                     <Link
                       href="/book"
-                      className="inline-flex items-center gap-1.5 px-4 py-2.5 text-xs font-bold text-ivory-50 bg-forest-900 hover:bg-forest-800 rounded-xl transition-colors shadow-sm"
+                      className="inline-flex items-center gap-2 px-5 py-3 text-xs font-bold text-ivory-50 bg-forest-900 hover:bg-forest-800 active:bg-forest-950 rounded-xl transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5"
                     >
-                      Book Slot <ArrowRight className="w-3.5 h-3.5" />
+                      <span>Book Video Slot</span>
+                      <ArrowRight className="w-4 h-4 text-sand-300" />
                     </Link>
                   </div>
                 </div>
@@ -173,7 +221,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 2. STATS & RECOGNITION */}
+      {/* 2. STATS & RECOGNITION (Full responsive spacing) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 bg-forest-950 text-ivory-100 rounded-3xl p-8 lg:p-10 shadow-xl border border-forest-900">
           <div className="space-y-1 text-center sm:text-left">
@@ -252,7 +300,7 @@ export default function HomePage() {
 
               <Link
                 href={`/book?service=${service.slug}`}
-                className="w-full py-3 text-center text-xs font-bold text-forest-900 hover:text-white bg-forest-50 hover:bg-forest-900 border border-forest-200 rounded-xl transition-all"
+                className="w-full py-3.5 text-center text-xs font-bold text-forest-900 hover:text-white bg-forest-50 hover:bg-forest-900 border border-forest-200 rounded-xl transition-all shadow-sm"
               >
                 Select & Book Slot
               </Link>
@@ -276,7 +324,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="bg-white p-7 rounded-3xl border border-ivory-300 shadow-sm space-y-4">
               <div className="w-12 h-12 rounded-2xl bg-forest-100 text-forest-900 font-extrabold flex items-center justify-center text-lg">
                 01

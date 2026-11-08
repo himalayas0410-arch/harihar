@@ -274,29 +274,44 @@ export default function BookingPage() {
           )}
         </div>
 
-        {/* Step Indicator */}
-        <div className="grid grid-cols-6 gap-2 text-[11px] font-bold text-center">
-          {[
-            { num: 1, label: 'Profile' },
-            { num: 2, label: 'Service' },
-            { num: 3, label: 'Method' },
-            { num: 4, label: 'Slot' },
-            { num: 5, label: 'Intake' },
-            { num: 6, label: 'Payment' },
-          ].map((s) => (
-            <div
-              key={s.num}
-              className={`py-2 rounded-xl border transition-all ${
-                currentStep === s.num
-                  ? 'bg-forest-900 text-ivory-50 border-forest-900 shadow-sm'
-                  : currentStep > s.num
-                  ? 'bg-forest-100 text-forest-900 border-forest-200'
-                  : 'bg-white text-sage-600 border-ivory-300'
-              }`}
-            >
-              {s.num}. {s.label}
-            </div>
-          ))}
+        {/* Step Indicator - Responsive on all devices */}
+        <div className="space-y-2">
+          {/* Mobile Step Header */}
+          <div className="sm:hidden bg-white p-3.5 rounded-2xl border border-ivory-300 shadow-sm flex items-center justify-between">
+            <span className="text-xs font-bold text-forest-950">
+              Step {currentStep} of 6: {
+                ['Profile Verification', 'Select Service', 'Consultation Method', 'Date & Slot', 'Medical Intake', 'Payment & Confirmation'][currentStep - 1]
+              }
+            </span>
+            <span className="text-xs font-bold text-forest-700 bg-forest-50 px-2 py-0.5 rounded-full border border-forest-200">
+              {Math.round((currentStep / 6) * 100)}%
+            </span>
+          </div>
+
+          {/* Desktop & Tablet Step Grid */}
+          <div className="hidden sm:grid sm:grid-cols-6 gap-2 text-[11px] font-bold text-center">
+            {[
+              { num: 1, label: 'Profile' },
+              { num: 2, label: 'Service' },
+              { num: 3, label: 'Method' },
+              { num: 4, label: 'Slot' },
+              { num: 5, label: 'Intake' },
+              { num: 6, label: 'Payment' },
+            ].map((s) => (
+              <div
+                key={s.num}
+                className={`py-2 px-1 rounded-xl border transition-all ${
+                  currentStep === s.num
+                    ? 'bg-forest-900 text-ivory-50 border-forest-900 shadow-sm'
+                    : currentStep > s.num
+                    ? 'bg-forest-100 text-forest-900 border-forest-200'
+                    : 'bg-white text-sage-600 border-ivory-300'
+                }`}
+              >
+                {s.num}. {s.label}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
