@@ -1,19 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
 import {
-  ShieldCheck,
   Calendar,
-  Video,
-  FileText,
-  Star,
-  CheckCircle2,
   Clock,
   ArrowRight,
+  Star,
+  CheckCircle2,
   Lock,
   PhoneCall,
-  Stethoscope,
-  ImageIcon,
-  Sparkles,
 } from 'lucide-react';
 import { fallbackDoctor, fallbackServices } from '@/lib/api';
 import { formatINR } from '@/lib/utils';
@@ -53,178 +47,116 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="space-y-24 pb-24 bg-[#FAF8F5]">
-      {/* 1. HERO SECTION (Matches Reference Mockup) */}
-      <section className="relative pt-6 pb-16 lg:pt-14 lg:pb-24 overflow-hidden bg-gradient-to-br from-[#F5F2EB] via-[#FAF8F5] to-[#E9EFEA]">
-        {/* Organic botanical wave at bottom left */}
-        <div className="absolute bottom-0 left-0 w-72 sm:w-96 h-28 sm:h-36 pointer-events-none opacity-60 z-0">
-          <svg viewBox="0 0 400 150" fill="none" className="w-full h-full">
-            <path
-              d="M0 150 C 120 150, 160 90, 240 80 C 310 70, 360 110, 400 130 L 400 150 L 0 150 Z"
-              fill="#CFDDD3"
-              opacity="0.6"
+    <div className="space-y-20 pb-24 bg-[#FAF8F5]">
+      {/* 1. HERO BANNER SECTION (Using Premium Banner with Interactive Buttons on Top) */}
+      <section className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6">
+        <div className="relative w-full aspect-[1756/895] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-ivory-300/80 bg-[#FAF8F5]">
+          {/* High-Resolution Banner Image */}
+          <img
+            src="/premium-banner.png"
+            alt="DermaCare - Dr. Harihar Sharma AIIMS MD Dermatology"
+            className="w-full h-full object-cover select-none pointer-events-none"
+          />
+
+          {/* Action Buttons Directly on Top of the Banner */}
+          <div className="absolute top-[60.5%] left-[7.9%] flex items-center gap-2 sm:gap-3 md:gap-4 z-20">
+            <Link
+              href="/book"
+              className="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 py-2 sm:px-6 sm:py-3 md:px-7 md:py-3.5 lg:px-8 lg:py-4 text-[10px] sm:text-xs md:text-sm lg:text-base font-bold text-ivory-50 bg-[#163528] hover:bg-[#11291F] active:bg-[#0B1E16] rounded-lg sm:rounded-xl md:rounded-2xl shadow-xl shadow-forest-950/25 transition-all hover:scale-105 hover:-translate-y-0.5"
+            >
+              <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-sand-300" />
+              <span>Book Online Consultation</span>
+            </Link>
+
+            <Link
+              href="/services"
+              className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-2 sm:px-5 sm:py-3 md:px-6 md:py-3.5 lg:px-7 lg:py-4 text-[10px] sm:text-xs md:text-sm lg:text-base font-semibold text-forest-950 hover:text-forest-900 bg-white/95 hover:bg-ivory-100 border border-ivory-300 rounded-lg sm:rounded-xl md:rounded-2xl transition-all shadow-md hover:scale-105 hover:-translate-y-0.5 backdrop-blur-xs"
+            >
+              <span>View Services & Fees</span>
+              <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-forest-700" />
+            </Link>
+          </div>
+
+          {/* Clickable Hotspots for the 5 Treatment Pills */}
+          <div className="hidden sm:block">
+            {/* Pill 1: Acne & Scarring */}
+            <Link
+              href="/services#acne"
+              title="Acne & Acne Scars Consultation"
+              className="absolute top-[17%] right-[3%] w-[25%] h-[11%] rounded-full cursor-pointer hover:ring-2 hover:ring-emerald-500/50 hover:bg-emerald-500/10 transition-all z-20"
+              aria-label="Acne & Scarring"
             />
-            <path
-              d="M0 150 C 80 150, 130 110, 200 110 C 270 110, 310 140, 350 150 Z"
-              fill="#95A990"
-              opacity="0.35"
+            {/* Pill 2: Hair Fall & PRP */}
+            <Link
+              href="/services#hair"
+              title="Hair Fall & Trichology Assessment"
+              className="absolute top-[31%] right-[3%] w-[25%] h-[11%] rounded-full cursor-pointer hover:ring-2 hover:ring-emerald-500/50 hover:bg-emerald-500/10 transition-all z-20"
+              aria-label="Hair Fall & PRP"
             />
-          </svg>
+            {/* Pill 3: Pigmentation */}
+            <Link
+              href="/services#pigmentation"
+              title="Melasma & Skin Tone Correction"
+              className="absolute top-[45%] right-[3%] w-[25%] h-[11%] rounded-full cursor-pointer hover:ring-2 hover:ring-emerald-500/50 hover:bg-emerald-500/10 transition-all z-20"
+              aria-label="Pigmentation"
+            />
+            {/* Pill 4: Eczema & Allergies */}
+            <Link
+              href="/services#eczema"
+              title="Eczema, Psoriasis & Allergies"
+              className="absolute top-[59%] right-[3%] w-[25%] h-[11%] rounded-full cursor-pointer hover:ring-2 hover:ring-emerald-500/50 hover:bg-emerald-500/10 transition-all z-20"
+              aria-label="Eczema & Allergies"
+            />
+            {/* Pill 5: Skin Rejuvenation */}
+            <Link
+              href="/services#rejuvenation"
+              title="Skin Barrier Rejuvenation"
+              className="absolute top-[73%] right-[3%] w-[25%] h-[11%] rounded-full cursor-pointer hover:ring-2 hover:ring-emerald-500/50 hover:bg-emerald-500/10 transition-all z-20"
+              aria-label="Skin Rejuvenation"
+            />
+          </div>
+
+          {/* Clickable Hotspots for 4 Bottom Features */}
+          <div className="hidden md:block">
+            <Link
+              href="/book"
+              title="Online Video Consultations"
+              className="absolute top-[77%] left-[7.5%] w-[9.5%] h-[9%] rounded-xl cursor-pointer hover:ring-2 hover:ring-emerald-500/40 z-20"
+            />
+            <Link
+              href="/portal"
+              title="Official Digital Prescriptions"
+              className="absolute top-[77%] left-[17.5%] w-[9.5%] h-[9%] rounded-xl cursor-pointer hover:ring-2 hover:ring-emerald-500/40 z-20"
+            />
+            <Link
+              href="/doctor"
+              title="Treatment Follow-ups"
+              className="absolute top-[77%] left-[27.5%] w-[9.5%] h-[9%] rounded-xl cursor-pointer hover:ring-2 hover:ring-emerald-500/40 z-20"
+            />
+            <Link
+              href="/portal"
+              title="Skin Progress Tracking"
+              className="absolute top-[77%] left-[37.5%] w-[9.5%] h-[9%] rounded-xl cursor-pointer hover:ring-2 hover:ring-emerald-500/40 z-20"
+            />
+          </div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-4 items-center">
-            {/* Left Column: Headline, Trust Pill, Subtitle, CTAs & 4 Feature Icons */}
-            <div className="lg:col-span-6 xl:col-span-6 space-y-6">
-              {/* Trust Pill */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E4E9E2] border border-[#CAD5C8] text-forest-900 text-xs font-semibold shadow-xs">
-                <ShieldCheck className="w-4 h-4 text-forest-700 shrink-0" />
-                <span>Evidence-Based • Personalized Care • Online Consultations</span>
-              </div>
-
-              {/* Main Headline */}
-              <h1 className="text-4xl sm:text-5xl lg:text-[52px] xl:text-[56px] font-extrabold tracking-tight text-forest-950 leading-[1.12]">
-                Expert Dermatology Care
-                <br className="hidden sm:inline" />{' '}
-                for Healthy, Radiant Skin
-              </h1>
-
-              {/* Mission Subtitle */}
-              <p className="text-base sm:text-lg text-forest-900/80 leading-relaxed max-w-xl font-normal">
-                Consult <strong className="text-forest-950 font-bold">Dr. Harihar Sharma, AIIMS MD</strong> for acne, hair fall, pigmentation, eczema and more — with safe, effective and evidence-based treatments, now online from anywhere in India.
-              </p>
-
-              {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2">
-                <Link
-                  href="/book"
-                  className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 text-sm sm:text-base font-bold text-ivory-50 bg-[#163528] hover:bg-[#11291F] active:bg-[#0B1E16] rounded-xl shadow-lg shadow-forest-950/20 transition-all hover:-translate-y-0.5"
-                >
-                  <Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-sand-300" />
-                  <span>Book Online Consultation</span>
-                </Link>
-
-                <Link
-                  href="/services"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm sm:text-base font-semibold text-forest-950 hover:text-forest-900 bg-white hover:bg-ivory-100 border border-ivory-300 rounded-xl transition-all shadow-sm"
-                >
-                  <span>View Services & Fees</span>
-                  <ArrowRight className="w-4 h-4 text-forest-700" />
-                </Link>
-              </div>
-
-              {/* 4 Bottom Feature Icons */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 pt-6 border-t border-ivory-300/80 max-w-xl">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-lg bg-white border border-ivory-300 flex items-center justify-center text-forest-800 shadow-xs shrink-0">
-                    <Video className="w-4 h-4" />
-                  </div>
-                  <span className="text-xs font-bold text-forest-950 leading-tight">
-                    Online<br />Consultations
-                  </span>
-                </div>
-
-                <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-lg bg-white border border-ivory-300 flex items-center justify-center text-forest-800 shadow-xs shrink-0">
-                    <FileText className="w-4 h-4" />
-                  </div>
-                  <span className="text-xs font-bold text-forest-950 leading-tight">
-                    Digital<br />Prescriptions
-                  </span>
-                </div>
-
-                <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-lg bg-white border border-ivory-300 flex items-center justify-center text-forest-800 shadow-xs shrink-0">
-                    <Stethoscope className="w-4 h-4" />
-                  </div>
-                  <span className="text-xs font-bold text-forest-950 leading-tight">
-                    Treatment<br />Follow-ups
-                  </span>
-                </div>
-
-                <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-lg bg-white border border-ivory-300 flex items-center justify-center text-forest-800 shadow-xs shrink-0">
-                    <ImageIcon className="w-4 h-4" />
-                  </div>
-                  <span className="text-xs font-bold text-forest-950 leading-tight">
-                    Progress<br />Tracking
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Column: Doctor Showcase with Arch, Plant, Cosmetics & 5 Floating Pills */}
-            <div className="lg:col-span-6 xl:col-span-6 flex flex-col items-center lg:items-end">
-              <div className="relative w-full max-w-lg lg:max-w-xl xl:max-w-2xl select-none">
-                <img
-                  src="/hero-doctor-blend.png"
-                  alt="Dr. Harihar Sharma (AIIMS MD Dermatology) with clinical treatments"
-                  className="w-full h-auto object-contain rounded-2xl drop-shadow-md"
-                />
-
-                {/* Desktop Interactive Clickable Hotspots overlaying the 5 pills */}
-                <div className="hidden sm:block">
-                  {/* 1. Acne & Scarring */}
-                  <Link
-                    href="/services#acne"
-                    title="Acne & Acne Scars Consultation"
-                    className="absolute top-[8%] right-[2%] w-[38%] h-[15%] rounded-2xl cursor-pointer hover:ring-2 hover:ring-emerald-500/40 hover:bg-emerald-500/5 transition-all"
-                    aria-label="Acne & Scarring Service"
-                  />
-                  {/* 2. Hair Fall & PRP */}
-                  <Link
-                    href="/services#hair"
-                    title="Hair Fall & Trichology Assessment"
-                    className="absolute top-[25%] right-[2%] w-[38%] h-[15%] rounded-2xl cursor-pointer hover:ring-2 hover:ring-emerald-500/40 hover:bg-emerald-500/5 transition-all"
-                    aria-label="Hair Fall & PRP Service"
-                  />
-                  {/* 3. Pigmentation */}
-                  <Link
-                    href="/services#pigmentation"
-                    title="Melasma & Pigmentation Correction"
-                    className="absolute top-[42%] right-[2%] w-[38%] h-[15%] rounded-2xl cursor-pointer hover:ring-2 hover:ring-emerald-500/40 hover:bg-emerald-500/5 transition-all"
-                    aria-label="Pigmentation Service"
-                  />
-                  {/* 4. Eczema & Allergies */}
-                  <Link
-                    href="/services#eczema"
-                    title="Eczema, Psoriasis & Allergy Relief"
-                    className="absolute top-[59%] right-[2%] w-[38%] h-[15%] rounded-2xl cursor-pointer hover:ring-2 hover:ring-emerald-500/40 hover:bg-emerald-500/5 transition-all"
-                    aria-label="Eczema & Allergies Service"
-                  />
-                  {/* 5. Skin Rejuvenation */}
-                  <Link
-                    href="/services#rejuvenation"
-                    title="Skin Barrier Rejuvenation"
-                    className="absolute top-[76%] right-[2%] w-[38%] h-[15%] rounded-2xl cursor-pointer hover:ring-2 hover:ring-emerald-500/40 hover:bg-emerald-500/5 transition-all"
-                    aria-label="Skin Rejuvenation Service"
-                  />
-                </div>
-              </div>
-
-              {/* Mobile-Friendly Treatment Chips (for smaller screens) */}
-              <div className="lg:hidden w-full pt-4">
-                <p className="text-xs font-bold text-forest-900 mb-2">Clinical Specializations:</p>
-                <div className="flex flex-wrap gap-2">
-                  {[
-                    { name: 'Acne & Scarring', slug: 'acne-and-acne-scars' },
-                    { name: 'Hair Fall & PRP', slug: 'hair-fall-scalp-evaluation' },
-                    { name: 'Pigmentation', slug: 'melasma-pigmentation' },
-                    { name: 'Eczema & Allergies', slug: 'general-dermatology-eczema-rash' },
-                    { name: 'Skin Rejuvenation', slug: 'skin-rejuvenation' },
-                  ].map((item) => (
-                    <Link
-                      key={item.name}
-                      href="/services"
-                      className="px-3 py-1.5 text-xs font-bold text-forest-950 bg-white border border-ivory-300 rounded-xl shadow-xs hover:bg-forest-50"
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
+        {/* Mobile Extra Action Buttons (for smaller screens under 640px) */}
+        <div className="sm:hidden mt-3.5 grid grid-cols-2 gap-2.5">
+          <Link
+            href="/book"
+            className="flex items-center justify-center gap-1.5 py-3 text-xs font-bold text-ivory-50 bg-[#163528] rounded-xl shadow-md"
+          >
+            <Calendar className="w-3.5 h-3.5 text-sand-300" />
+            <span>Book Consultation</span>
+          </Link>
+          <Link
+            href="/services"
+            className="flex items-center justify-center gap-1.5 py-3 text-xs font-semibold text-forest-950 bg-white border border-ivory-300 rounded-xl shadow-xs"
+          >
+            <span>View Services & Fees</span>
+            <ArrowRight className="w-3.5 h-3.5 text-forest-700" />
+          </Link>
         </div>
       </section>
 
