@@ -48,70 +48,70 @@ export default function HomePage() {
 
   return (
     <div className="space-y-20 pb-24 bg-[#FAF8F5]">
-      {/* 1. HERO BANNER SECTION (Using Premium Banner with Interactive Buttons on Top) */}
+      {/* 1. HERO BANNER SECTION (Using Modern Dermatology Care Banner with Buttons Overlaid) */}
       <section className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6">
-        <div className="relative w-full aspect-[1756/895] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-ivory-300/80 bg-[#FAF8F5]">
-          {/* High-Resolution Banner Image */}
+        <div className="relative w-full aspect-[2172/724] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-ivory-300/80 bg-[#FAF8F5]">
+          {/* High-Resolution Modern Banner Image */}
           <img
-            src="/premium-banner.png"
+            src="/modern-banner.png"
             alt="DermaCare - Dr. Harihar Sharma AIIMS MD Dermatology"
             className="w-full h-full object-cover select-none pointer-events-none"
           />
 
-          {/* Action Buttons Directly on Top of the Banner */}
-          <div className="absolute top-[60.5%] left-[7.9%] flex items-center gap-2 sm:gap-3 md:gap-4 z-20">
+          {/* Action Buttons Directly on Top of the Banner in the Empty Space */}
+          <div className="absolute top-[56.5%] left-[14.7%] flex items-center gap-2 sm:gap-3 md:gap-4 z-20">
             <Link
               href="/book"
-              className="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 py-2 sm:px-6 sm:py-3 md:px-7 md:py-3.5 lg:px-8 lg:py-4 text-[10px] sm:text-xs md:text-sm lg:text-base font-bold text-ivory-50 bg-[#163528] hover:bg-[#11291F] active:bg-[#0B1E16] rounded-lg sm:rounded-xl md:rounded-2xl shadow-xl shadow-forest-950/25 transition-all hover:scale-105 hover:-translate-y-0.5"
+              className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-5 sm:py-2.5 md:px-6 md:py-3 lg:px-7 lg:py-3.5 text-[9px] sm:text-xs md:text-sm lg:text-base font-bold text-ivory-50 bg-[#163528] hover:bg-[#11291F] active:bg-[#0B1E16] rounded-md sm:rounded-xl md:rounded-2xl shadow-xl shadow-forest-950/25 transition-all hover:scale-105 hover:-translate-y-0.5"
             >
-              <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-sand-300" />
+              <Calendar className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-sand-300" />
               <span>Book Online Consultation</span>
             </Link>
 
             <Link
               href="/services"
-              className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-2 sm:px-5 sm:py-3 md:px-6 md:py-3.5 lg:px-7 lg:py-4 text-[10px] sm:text-xs md:text-sm lg:text-base font-semibold text-forest-950 hover:text-forest-900 bg-white/95 hover:bg-ivory-100 border border-ivory-300 rounded-lg sm:rounded-xl md:rounded-2xl transition-all shadow-md hover:scale-105 hover:-translate-y-0.5 backdrop-blur-xs"
+              className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 py-1.5 sm:px-4 sm:py-2.5 md:px-5 md:py-3 lg:px-6 lg:py-3.5 text-[9px] sm:text-xs md:text-sm lg:text-base font-semibold text-forest-950 hover:text-forest-900 bg-white/95 hover:bg-ivory-100 border border-ivory-300 rounded-md sm:rounded-xl md:rounded-2xl transition-all shadow-md hover:scale-105 hover:-translate-y-0.5 backdrop-blur-xs"
             >
               <span>View Services & Fees</span>
-              <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-forest-700" />
+              <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 text-forest-700" />
             </Link>
           </div>
 
-          {/* Clickable Hotspots for the 5 Treatment Pills */}
+          {/* Clickable Hotspots for the 5 Treatment Pills on the right */}
           <div className="hidden sm:block">
             {/* Pill 1: Acne & Scarring */}
             <Link
               href="/services#acne"
               title="Acne & Acne Scars Consultation"
-              className="absolute top-[17%] right-[3%] w-[25%] h-[11%] rounded-full cursor-pointer hover:ring-2 hover:ring-emerald-500/50 hover:bg-emerald-500/10 transition-all z-20"
+              className="absolute top-[14%] right-[3%] w-[22%] h-[12%] rounded-full cursor-pointer hover:ring-2 hover:ring-emerald-500/50 hover:bg-emerald-500/10 transition-all z-20"
               aria-label="Acne & Scarring"
             />
             {/* Pill 2: Hair Fall & PRP */}
             <Link
               href="/services#hair"
               title="Hair Fall & Trichology Assessment"
-              className="absolute top-[31%] right-[3%] w-[25%] h-[11%] rounded-full cursor-pointer hover:ring-2 hover:ring-emerald-500/50 hover:bg-emerald-500/10 transition-all z-20"
+              className="absolute top-[29%] right-[3%] w-[22%] h-[12%] rounded-full cursor-pointer hover:ring-2 hover:ring-emerald-500/50 hover:bg-emerald-500/10 transition-all z-20"
               aria-label="Hair Fall & PRP"
             />
             {/* Pill 3: Pigmentation */}
             <Link
               href="/services#pigmentation"
               title="Melasma & Skin Tone Correction"
-              className="absolute top-[45%] right-[3%] w-[25%] h-[11%] rounded-full cursor-pointer hover:ring-2 hover:ring-emerald-500/50 hover:bg-emerald-500/10 transition-all z-20"
+              className="absolute top-[44%] right-[3%] w-[22%] h-[12%] rounded-full cursor-pointer hover:ring-2 hover:ring-emerald-500/50 hover:bg-emerald-500/10 transition-all z-20"
               aria-label="Pigmentation"
             />
             {/* Pill 4: Eczema & Allergies */}
             <Link
               href="/services#eczema"
               title="Eczema, Psoriasis & Allergies"
-              className="absolute top-[59%] right-[3%] w-[25%] h-[11%] rounded-full cursor-pointer hover:ring-2 hover:ring-emerald-500/50 hover:bg-emerald-500/10 transition-all z-20"
+              className="absolute top-[59%] right-[3%] w-[22%] h-[12%] rounded-full cursor-pointer hover:ring-2 hover:ring-emerald-500/50 hover:bg-emerald-500/10 transition-all z-20"
               aria-label="Eczema & Allergies"
             />
             {/* Pill 5: Skin Rejuvenation */}
             <Link
               href="/services#rejuvenation"
               title="Skin Barrier Rejuvenation"
-              className="absolute top-[73%] right-[3%] w-[25%] h-[11%] rounded-full cursor-pointer hover:ring-2 hover:ring-emerald-500/50 hover:bg-emerald-500/10 transition-all z-20"
+              className="absolute top-[74%] right-[3%] w-[22%] h-[12%] rounded-full cursor-pointer hover:ring-2 hover:ring-emerald-500/50 hover:bg-emerald-500/10 transition-all z-20"
               aria-label="Skin Rejuvenation"
             />
           </div>
@@ -121,27 +121,27 @@ export default function HomePage() {
             <Link
               href="/book"
               title="Online Video Consultations"
-              className="absolute top-[77%] left-[7.5%] w-[9.5%] h-[9%] rounded-xl cursor-pointer hover:ring-2 hover:ring-emerald-500/40 z-20"
+              className="absolute top-[75%] left-[14.5%] w-[8%] h-[11%] rounded-xl cursor-pointer hover:ring-2 hover:ring-emerald-500/40 z-20"
             />
             <Link
               href="/portal"
               title="Official Digital Prescriptions"
-              className="absolute top-[77%] left-[17.5%] w-[9.5%] h-[9%] rounded-xl cursor-pointer hover:ring-2 hover:ring-emerald-500/40 z-20"
+              className="absolute top-[75%] left-[23%] w-[8%] h-[11%] rounded-xl cursor-pointer hover:ring-2 hover:ring-emerald-500/40 z-20"
             />
             <Link
               href="/doctor"
               title="Treatment Follow-ups"
-              className="absolute top-[77%] left-[27.5%] w-[9.5%] h-[9%] rounded-xl cursor-pointer hover:ring-2 hover:ring-emerald-500/40 z-20"
+              className="absolute top-[75%] left-[31.5%] w-[8%] h-[11%] rounded-xl cursor-pointer hover:ring-2 hover:ring-emerald-500/40 z-20"
             />
             <Link
               href="/portal"
               title="Skin Progress Tracking"
-              className="absolute top-[77%] left-[37.5%] w-[9.5%] h-[9%] rounded-xl cursor-pointer hover:ring-2 hover:ring-emerald-500/40 z-20"
+              className="absolute top-[75%] left-[40%] w-[8%] h-[11%] rounded-xl cursor-pointer hover:ring-2 hover:ring-emerald-500/40 z-20"
             />
           </div>
         </div>
 
-        {/* Mobile Extra Action Buttons (for smaller screens under 640px) */}
+        {/* Mobile Extra Action Buttons (for smaller phone screens under 640px) */}
         <div className="sm:hidden mt-3.5 grid grid-cols-2 gap-2.5">
           <Link
             href="/book"
