@@ -8,15 +8,12 @@ import {
   Star,
   CheckCircle2,
   Clock,
-  Award,
   ArrowRight,
-  Sparkles,
   Lock,
-  ChevronRight,
   PhoneCall,
-  UserCheck,
-  Check,
-  BadgeCheck,
+  Stethoscope,
+  ImageIcon,
+  Sparkles,
 } from 'lucide-react';
 import { fallbackDoctor, fallbackServices } from '@/lib/api';
 import { formatINR } from '@/lib/utils';
@@ -57,163 +54,173 @@ export default function HomePage() {
 
   return (
     <div className="space-y-24 pb-24 bg-[#FAF8F5]">
-      {/* 1. LUXURY HERO SECTION */}
-      <section className="relative pt-8 pb-16 lg:pt-16 lg:pb-24 overflow-hidden bg-gradient-to-b from-ivory-200/80 via-ivory-100/60 to-[#FAF8F5]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-            {/* Left Column: Hero Text & Value Proposition */}
-            <div className="lg:col-span-7 space-y-6">
-              {/* Trust Badge */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-forest-900/5 border border-forest-800/15 text-forest-900 text-xs font-semibold">
-                <ShieldCheck className="w-4 h-4 text-forest-700" />
-                <span>NMC Registered • AIIMS Senior Residency • 11+ Years Post-PG</span>
+      {/* 1. HERO SECTION (Matches Reference Mockup) */}
+      <section className="relative pt-6 pb-16 lg:pt-14 lg:pb-24 overflow-hidden bg-gradient-to-br from-[#F5F2EB] via-[#FAF8F5] to-[#E9EFEA]">
+        {/* Organic botanical wave at bottom left */}
+        <div className="absolute bottom-0 left-0 w-72 sm:w-96 h-28 sm:h-36 pointer-events-none opacity-60 z-0">
+          <svg viewBox="0 0 400 150" fill="none" className="w-full h-full">
+            <path
+              d="M0 150 C 120 150, 160 90, 240 80 C 310 70, 360 110, 400 130 L 400 150 L 0 150 Z"
+              fill="#CFDDD3"
+              opacity="0.6"
+            />
+            <path
+              d="M0 150 C 80 150, 130 110, 200 110 C 270 110, 310 140, 350 150 Z"
+              fill="#95A990"
+              opacity="0.35"
+            />
+          </svg>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-4 items-center">
+            {/* Left Column: Headline, Trust Pill, Subtitle, CTAs & 4 Feature Icons */}
+            <div className="lg:col-span-6 xl:col-span-6 space-y-6">
+              {/* Trust Pill */}
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E4E9E2] border border-[#CAD5C8] text-forest-900 text-xs font-semibold shadow-xs">
+                <ShieldCheck className="w-4 h-4 text-forest-700 shrink-0" />
+                <span>Evidence-Based • Personalized Care • Online Consultations</span>
               </div>
 
               {/* Main Headline */}
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-forest-950 leading-[1.12]">
-                Clear, Healthy Skin with{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-forest-800 via-forest-600 to-sage-600">
-                  Evidence-Based
-                </span>{' '}
-                Dermatology
+              <h1 className="text-4xl sm:text-5xl lg:text-[52px] xl:text-[56px] font-extrabold tracking-tight text-forest-950 leading-[1.12]">
+                Expert Dermatology Care
+                <br className="hidden sm:inline" />{' '}
+                for Healthy, Radiant Skin
               </h1>
 
-              {/* Clinical Mission Statement */}
-              <p className="text-base sm:text-lg text-forest-900/75 leading-relaxed max-w-2xl font-normal">
-                Consult senior dermatologist <strong className="text-forest-950 font-bold">Dr. Harihar Sharma</strong> from anywhere in India. Get direct clinical diagnosis for acne, hair thinning, melasma, and eczema with official, doctor-approved digital prescriptions valid nationwide.
+              {/* Mission Subtitle */}
+              <p className="text-base sm:text-lg text-forest-900/80 leading-relaxed max-w-xl font-normal">
+                Consult <strong className="text-forest-950 font-bold">Dr. Harihar Sharma, AIIMS MD</strong> for acne, hair fall, pigmentation, eczema and more — with safe, effective and evidence-based treatments, now online from anywhere in India.
               </p>
 
               {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2">
                 <Link
                   href="/book"
-                  className="inline-flex items-center justify-center gap-2.5 px-8 py-4 text-base font-bold text-ivory-50 bg-forest-900 hover:bg-forest-800 active:bg-forest-950 rounded-2xl shadow-xl shadow-forest-950/20 transition-all hover:-translate-y-0.5"
+                  className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 text-sm sm:text-base font-bold text-ivory-50 bg-[#163528] hover:bg-[#11291F] active:bg-[#0B1E16] rounded-xl shadow-lg shadow-forest-950/20 transition-all hover:-translate-y-0.5"
                 >
-                  <Calendar className="w-5 h-5 text-sand-300" />
+                  <Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-sand-300" />
                   <span>Book Online Consultation</span>
                 </Link>
 
                 <Link
                   href="/services"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-4 text-base font-semibold text-forest-900 hover:text-forest-950 bg-white hover:bg-ivory-200 border border-ivory-300 rounded-2xl transition-all shadow-sm"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm sm:text-base font-semibold text-forest-950 hover:text-forest-900 bg-white hover:bg-ivory-100 border border-ivory-300 rounded-xl transition-all shadow-sm"
                 >
                   <span>View Services & Fees</span>
-                  <ChevronRight className="w-4 h-4 text-sage-500" />
+                  <ArrowRight className="w-4 h-4 text-forest-700" />
                 </Link>
               </div>
 
-              {/* Practice Highlights Pills */}
-              <div className="grid grid-cols-3 gap-3 sm:gap-4 pt-6 border-t border-ivory-300 max-w-xl">
-                <div className="bg-white/70 backdrop-blur-sm p-3 rounded-2xl border border-ivory-300/80 space-y-1">
-                  <p className="text-[11px] font-semibold text-sage-700">Availability</p>
-                  <p className="text-xs sm:text-sm font-bold text-forest-950 flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                    Slots Today (IST)
-                  </p>
+              {/* 4 Bottom Feature Icons */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 pt-6 border-t border-ivory-300/80 max-w-xl">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-lg bg-white border border-ivory-300 flex items-center justify-center text-forest-800 shadow-xs shrink-0">
+                    <Video className="w-4 h-4" />
+                  </div>
+                  <span className="text-xs font-bold text-forest-950 leading-tight">
+                    Online<br />Consultations
+                  </span>
                 </div>
-                <div className="bg-white/70 backdrop-blur-sm p-3 rounded-2xl border border-ivory-300/80 space-y-1">
-                  <p className="text-[11px] font-semibold text-sage-700">Video Platform</p>
-                  <p className="text-xs sm:text-sm font-bold text-forest-950">Meet / Zoom / WA</p>
+
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-lg bg-white border border-ivory-300 flex items-center justify-center text-forest-800 shadow-xs shrink-0">
+                    <FileText className="w-4 h-4" />
+                  </div>
+                  <span className="text-xs font-bold text-forest-950 leading-tight">
+                    Digital<br />Prescriptions
+                  </span>
                 </div>
-                <div className="bg-white/70 backdrop-blur-sm p-3 rounded-2xl border border-ivory-300/80 space-y-1">
-                  <p className="text-[11px] font-semibold text-sage-700">Prescription</p>
-                  <p className="text-xs sm:text-sm font-bold text-forest-950">Official PDF Rx</p>
+
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-lg bg-white border border-ivory-300 flex items-center justify-center text-forest-800 shadow-xs shrink-0">
+                    <Stethoscope className="w-4 h-4" />
+                  </div>
+                  <span className="text-xs font-bold text-forest-950 leading-tight">
+                    Treatment<br />Follow-ups
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-lg bg-white border border-ivory-300 flex items-center justify-center text-forest-800 shadow-xs shrink-0">
+                    <ImageIcon className="w-4 h-4" />
+                  </div>
+                  <span className="text-xs font-bold text-forest-950 leading-tight">
+                    Progress<br />Tracking
+                  </span>
                 </div>
               </div>
             </div>
 
-            {/* Right Column: Luxury Doctor Profile Card */}
-            <div className="lg:col-span-5 flex justify-center">
-              <div className="relative w-full max-w-md">
-                {/* Decorative background glow */}
-                <div className="absolute -inset-4 bg-gradient-to-tr from-forest-400/20 via-sage-300/30 to-sand-400/20 rounded-[32px] blur-2xl transform -rotate-1"></div>
+            {/* Right Column: Doctor Showcase with Arch, Plant, Cosmetics & 5 Floating Pills */}
+            <div className="lg:col-span-6 xl:col-span-6 flex flex-col items-center lg:items-end">
+              <div className="relative w-full max-w-lg lg:max-w-xl xl:max-w-2xl select-none">
+                <img
+                  src="/hero-doctor-blend.png"
+                  alt="Dr. Harihar Sharma (AIIMS MD Dermatology) with clinical treatments"
+                  className="w-full h-auto object-contain rounded-2xl drop-shadow-md"
+                />
 
-                <div className="relative bg-white rounded-3xl p-6 sm:p-7 shadow-premium border border-ivory-300 space-y-5">
-                  {/* Status & Rating Bar */}
-                  <div className="flex items-center justify-between pb-3 border-b border-ivory-200">
-                    <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
-                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                      Consultations Open Today
-                    </span>
-                    <span className="text-xs font-bold text-forest-900 flex items-center gap-1 bg-ivory-100 px-2.5 py-1 rounded-full border border-ivory-200">
-                      <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                      4.9 (1.2k+ reviews)
-                    </span>
-                  </div>
+                {/* Desktop Interactive Clickable Hotspots overlaying the 5 pills */}
+                <div className="hidden sm:block">
+                  {/* 1. Acne & Scarring */}
+                  <Link
+                    href="/services#acne"
+                    title="Acne & Acne Scars Consultation"
+                    className="absolute top-[8%] right-[2%] w-[38%] h-[15%] rounded-2xl cursor-pointer hover:ring-2 hover:ring-emerald-500/40 hover:bg-emerald-500/5 transition-all"
+                    aria-label="Acne & Scarring Service"
+                  />
+                  {/* 2. Hair Fall & PRP */}
+                  <Link
+                    href="/services#hair"
+                    title="Hair Fall & Trichology Assessment"
+                    className="absolute top-[25%] right-[2%] w-[38%] h-[15%] rounded-2xl cursor-pointer hover:ring-2 hover:ring-emerald-500/40 hover:bg-emerald-500/5 transition-all"
+                    aria-label="Hair Fall & PRP Service"
+                  />
+                  {/* 3. Pigmentation */}
+                  <Link
+                    href="/services#pigmentation"
+                    title="Melasma & Pigmentation Correction"
+                    className="absolute top-[42%] right-[2%] w-[38%] h-[15%] rounded-2xl cursor-pointer hover:ring-2 hover:ring-emerald-500/40 hover:bg-emerald-500/5 transition-all"
+                    aria-label="Pigmentation Service"
+                  />
+                  {/* 4. Eczema & Allergies */}
+                  <Link
+                    href="/services#eczema"
+                    title="Eczema, Psoriasis & Allergy Relief"
+                    className="absolute top-[59%] right-[2%] w-[38%] h-[15%] rounded-2xl cursor-pointer hover:ring-2 hover:ring-emerald-500/40 hover:bg-emerald-500/5 transition-all"
+                    aria-label="Eczema & Allergies Service"
+                  />
+                  {/* 5. Skin Rejuvenation */}
+                  <Link
+                    href="/services#rejuvenation"
+                    title="Skin Barrier Rejuvenation"
+                    className="absolute top-[76%] right-[2%] w-[38%] h-[15%] rounded-2xl cursor-pointer hover:ring-2 hover:ring-emerald-500/40 hover:bg-emerald-500/5 transition-all"
+                    aria-label="Skin Rejuvenation Service"
+                  />
+                </div>
+              </div>
 
-                  {/* Doctor Portrait Image */}
-                  <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-ivory-200 shadow-inner">
-                    <img
-                      src={doctor.profileImageUrl}
-                      alt={doctor.fullName}
-                      className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500"
-                    />
-                    {/* Floating credential pill */}
-                    <div className="absolute bottom-3 left-3 right-3 bg-white/95 backdrop-blur-md px-3 py-2 rounded-xl shadow-md border border-ivory-200 flex items-center justify-between text-xs">
-                      <div className="flex items-center gap-1.5 font-bold text-forest-950">
-                        <Award className="w-4 h-4 text-forest-700 shrink-0" />
-                        <span>MD Dermatology (AIIMS)</span>
-                      </div>
-                      <span className="text-[11px] font-semibold text-sage-700">
-                        11+ Yrs Post-PG
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Doctor Bio & Verified Info */}
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-1.5">
-                        <h3 className="text-xl font-extrabold text-forest-950">{doctor.fullName}</h3>
-                        <BadgeCheck className="w-5 h-5 text-forest-700" />
-                      </div>
-                      <span className="text-[11px] px-2.5 py-0.5 bg-forest-50 text-forest-800 font-bold rounded-full border border-forest-200">
-                        Senior Consultant
-                      </span>
-                    </div>
-
-                    <p className="text-xs text-sage-700 font-medium">
-                      Reg. No: <strong className="text-forest-950">{doctor.nmcRegistrationNumber}</strong> ({doctor.stateMedicalCouncil})
-                    </p>
-
-                    {/* Specialization Chips (Clean grid, no awkward wrapping) */}
-                    <div className="flex flex-wrap gap-1.5 pt-1">
-                      {['Acne & Scarring', 'Hair Fall & PRP', 'Melasma & Pigmentation', 'Eczema Relief'].map((tag) => (
-                        <span
-                          key={tag}
-                          className="text-[11px] font-semibold text-forest-900 bg-ivory-100 hover:bg-forest-50 px-2.5 py-1 rounded-lg border border-ivory-300 transition-colors"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    <p className="text-xs text-forest-900/75 leading-relaxed pt-1">
-                      Evidence-based clinical protocols with zero steroid abuse. Patient-tailored skincare and medical therapy.
-                    </p>
-                  </div>
-
-                  {/* Consultation Pricing & Action Bar */}
-                  <div className="pt-4 border-t border-ivory-200 flex items-center justify-between gap-4">
-                    <div>
-                      <p className="text-[11px] text-sage-600 font-semibold uppercase tracking-wider">
-                        Consultation Fee
-                      </p>
-                      <div className="flex items-baseline gap-1.5">
-                        <p className="text-2xl font-extrabold text-forest-950">
-                          {formatINR(doctor.consultationFeePaise)}
-                        </p>
-                        <span className="text-[10px] text-sage-600 font-medium">(GST incl.)</span>
-                      </div>
-                    </div>
+              {/* Mobile-Friendly Treatment Chips (for smaller screens) */}
+              <div className="lg:hidden w-full pt-4">
+                <p className="text-xs font-bold text-forest-900 mb-2">Clinical Specializations:</p>
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    { name: 'Acne & Scarring', slug: 'acne-and-acne-scars' },
+                    { name: 'Hair Fall & PRP', slug: 'hair-fall-scalp-evaluation' },
+                    { name: 'Pigmentation', slug: 'melasma-pigmentation' },
+                    { name: 'Eczema & Allergies', slug: 'general-dermatology-eczema-rash' },
+                    { name: 'Skin Rejuvenation', slug: 'skin-rejuvenation' },
+                  ].map((item) => (
                     <Link
-                      href="/book"
-                      className="inline-flex items-center gap-2 px-5 py-3 text-xs font-bold text-ivory-50 bg-forest-900 hover:bg-forest-800 active:bg-forest-950 rounded-xl transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5"
+                      key={item.name}
+                      href="/services"
+                      className="px-3 py-1.5 text-xs font-bold text-forest-950 bg-white border border-ivory-300 rounded-xl shadow-xs hover:bg-forest-50"
                     >
-                      <span>Book Video Slot</span>
-                      <ArrowRight className="w-4 h-4 text-sand-300" />
+                      {item.name}
                     </Link>
-                  </div>
+                  ))}
                 </div>
               </div>
             </div>
