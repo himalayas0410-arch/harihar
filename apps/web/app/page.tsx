@@ -48,10 +48,10 @@ export default function HomePage() {
 
   return (
     <div className="space-y-20 pb-24 bg-[#FAF8F5]">
-      {/* 1. HERO BANNER SECTION (Using Modern Dermatology Care Banner with Buttons Overlaid) */}
-      <section className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6">
-        <div className="relative w-full aspect-[2172/724] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-ivory-300/80 bg-[#FAF8F5]">
-          {/* High-Resolution Modern Banner Image */}
+      {/* 1. HERO BANNER SECTION - FULL SCREEN / 100% EDGE-TO-EDGE (No border, no card margins) */}
+      <section className="relative w-full overflow-hidden bg-[#FAF8F5] border-b border-ivory-300/70">
+        <div className="relative w-full aspect-[2172/724] select-none">
+          {/* Full Screen High-Resolution Modern Banner Image */}
           <img
             src="/modern-banner.png"
             alt="DermaCare - Dr. Harihar Sharma AIIMS MD Dermatology"
@@ -59,21 +59,21 @@ export default function HomePage() {
           />
 
           {/* Action Buttons Directly on Top of the Banner in the Empty Space */}
-          <div className="absolute top-[56.5%] left-[14.7%] flex items-center gap-2 sm:gap-3 md:gap-4 z-20">
+          <div className="absolute top-[56.5%] left-[14.7%] flex items-center gap-2 sm:gap-3 md:gap-4 lg:gap-5 z-20">
             <Link
               href="/book"
-              className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-5 sm:py-2.5 md:px-6 md:py-3 lg:px-7 lg:py-3.5 text-[9px] sm:text-xs md:text-sm lg:text-base font-bold text-ivory-50 bg-[#163528] hover:bg-[#11291F] active:bg-[#0B1E16] rounded-md sm:rounded-xl md:rounded-2xl shadow-xl shadow-forest-950/25 transition-all hover:scale-105 hover:-translate-y-0.5"
+              className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-5 sm:py-2.5 md:px-6 md:py-3.5 lg:px-8 lg:py-4 text-[10px] sm:text-xs md:text-sm lg:text-base font-bold text-ivory-50 bg-[#163528] hover:bg-[#11291F] active:bg-[#0B1E16] rounded-lg sm:rounded-xl md:rounded-2xl shadow-xl shadow-forest-950/25 transition-all hover:scale-105 hover:-translate-y-0.5"
             >
-              <Calendar className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-sand-300" />
+              <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-sand-300" />
               <span>Book Online Consultation</span>
             </Link>
 
             <Link
               href="/services"
-              className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 py-1.5 sm:px-4 sm:py-2.5 md:px-5 md:py-3 lg:px-6 lg:py-3.5 text-[9px] sm:text-xs md:text-sm lg:text-base font-semibold text-forest-950 hover:text-forest-900 bg-white/95 hover:bg-ivory-100 border border-ivory-300 rounded-md sm:rounded-xl md:rounded-2xl transition-all shadow-md hover:scale-105 hover:-translate-y-0.5 backdrop-blur-xs"
+              className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 py-1.5 sm:px-4 sm:py-2.5 md:px-5 md:py-3.5 lg:px-7 lg:py-4 text-[10px] sm:text-xs md:text-sm lg:text-base font-semibold text-forest-950 hover:text-forest-900 bg-white/95 hover:bg-ivory-100 border border-ivory-300 rounded-lg sm:rounded-xl md:rounded-2xl transition-all shadow-md hover:scale-105 hover:-translate-y-0.5 backdrop-blur-xs"
             >
               <span>View Services & Fees</span>
-              <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 text-forest-700" />
+              <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-forest-700" />
             </Link>
           </div>
 
@@ -142,7 +142,7 @@ export default function HomePage() {
         </div>
 
         {/* Mobile Extra Action Buttons (for smaller phone screens under 640px) */}
-        <div className="sm:hidden mt-3.5 grid grid-cols-2 gap-2.5">
+        <div className="sm:hidden px-4 py-3 grid grid-cols-2 gap-2.5 bg-ivory-100 border-t border-ivory-200">
           <Link
             href="/book"
             className="flex items-center justify-center gap-1.5 py-3 text-xs font-bold text-ivory-50 bg-[#163528] rounded-xl shadow-md"
